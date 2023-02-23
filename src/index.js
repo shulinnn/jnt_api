@@ -17,7 +17,23 @@ app.use(
   })
 );
 
-app.post(`/register`, async (req, res) => {
+app.get("/players", async (req, res) => {
+  try {
+    const result = await prisma.player.findMany({
+      select: {
+        username: true,
+        user_flag: true,
+        user_photo: true,
+      },
+    });
+
+    res.json(result);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post("/register", async (req, res) => {
   try {
     if (!req.files) {
       res.send({
@@ -25,26 +41,25 @@ app.post(`/register`, async (req, res) => {
         message: "No file uploaded !",
       });
     } else {
-      console.log(req.files);
-
-      const avatar = req.files.file;
-
+      const avatar = req.files.avatar;
       avatar.mv("./assets/" + avatar.name);
 
-      const { name, password, flag } = req.body;
+      const { username, password, country } = req.body;
       const result = await prisma.player.create({
         data: {
-          username: name,
+          username: username,
           password: password,
           user_photo: avatar.name,
-          user_flag: flag,
-          is_player: false,
+          user_flag: country,
+          case_ticket: 0,
         },
       });
+      /// Send json response to frontend
       res.json(result);
     }
   } catch (err) {
     console.log(err);
+    /// Send status with number 500 to frontend
     res.status(500).send(err);
   }
 });

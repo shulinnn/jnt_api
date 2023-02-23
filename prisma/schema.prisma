@@ -11,12 +11,46 @@ datasource db {
 }
 
 model Player {
-  id         Int      @id @default(autoincrement())
-  username   String   @unique
-  password   String   @unique
-  user_photo String
-  user_flag  String
-  is_player  Boolean
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id             Int       @id @default(autoincrement())
+  username       String    @unique
+  password       String    @unique
+  user_photo     String
+  user_flag      String
+  case_ticket    Int       @default(0)
+  betting_points Int       @default(0)
+  messageId      Message[]
+  Team           Team?     @relation(fields: [teamId], references: [id])
+  teamId         Int?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  message   String
+  sender    Player   @relation(fields: [playerId], references: [id])
+  playerId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Team {
+  id          Int      @id @default(autoincrement())
+  team_name   String
+  team_logo   String
+  team_points Int
+  players     Player[]
+  Match       Match[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Match {
+  id             Int      @id @default(autoincrement())
+  teams          Team[]
+  scores         Int[]
+  exchange_rates Float[]
+  rounds_to_play Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

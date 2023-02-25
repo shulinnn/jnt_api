@@ -17,7 +17,7 @@ app.use(
   })
 );
 
-app.get("api/players", async (req, res) => {
+app.get("players", async (req, res) => {
   try {
     const result = await prisma.player.findMany({
       select: {

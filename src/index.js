@@ -34,6 +34,20 @@ app.get("/players", async (req, res) => {
   }
 });
 
+app.post("login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const result = await prisma.player.findUnique({
+      where: {
+        username: username,
+        password: password,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/register", async (req, res) => {
   try {
     if (!req.files) {

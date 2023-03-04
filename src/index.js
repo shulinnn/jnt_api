@@ -34,15 +34,30 @@ app.get("/players", async (req, res) => {
   }
 });
 
-app.post("login", async (req, res) => {
+app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const result = await prisma.player.findUnique({
+    const result = await prisma.player.findFirst({
+      select: {
+        id: true,
+        username: true,
+        user_photo: true,
+        user_flag: true,
+        case_ticket: true,
+        betting_points: true,
+        teamId: true,
+      },
       where: {
         username: username,
         password: password,
       },
     });
+
+    if (result == null) {
+      res.status(403).send("Wrong password or username");
+    } else {
+      res.status(200).send(result);
+    }
   } catch (error) {
     console.log(error);
   }

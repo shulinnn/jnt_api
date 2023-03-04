@@ -54,10 +54,33 @@ app.post("/login", async (req, res) => {
     });
 
     if (result == null) {
-      res.status(404).send("Wrong password or username");
+      res.status(500).send("Wrong password or username");
     } else {
       res.status(200).send(result);
     }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/matches", async (req, res) => {
+  try {
+    const result = await prisma.match.findMany();
+    if (result == null) {
+      res.status(500).send("No data to show or data not found");
+    } else {
+      res.status(200).send(result);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.get("/messages", async (req, res) => {
+  try {
+    const result = await prisma.message.findMany();
+    if (result == null) res.status(500).send("No data to show...");
+    else res.status(200).send(result);
   } catch (error) {
     console.log(error);
   }

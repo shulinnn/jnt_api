@@ -54,7 +54,7 @@ app.post("/login", async (req, res) => {
     });
 
     if (result == null) {
-      res.status(403).send("Wrong password or username");
+      res.status(200).send("Wrong password or username");
     } else {
       res.status(200).send(result);
     }

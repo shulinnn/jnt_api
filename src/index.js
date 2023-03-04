@@ -69,7 +69,7 @@ app.get("/matches", async (req, res) => {
     if (result == null) {
       res.status(500).send("No data to show or data not found");
     } else {
-      res.status(200).send(result);
+      res.status(200).json(result);
     }
   } catch (error) {
     console.log(error);

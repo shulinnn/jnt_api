@@ -78,7 +78,11 @@ app.get("/matches", async (req, res) => {
 
 app.get("/messages", async (req, res) => {
   try {
-    const result = await prisma.message.findMany();
+    const result = await prisma.message.findMany({
+      include: {
+        sender: true,
+      },
+    });
     if (result == null) res.status(500).send("No data to show...");
     else res.status(200).send(result);
   } catch (error) {

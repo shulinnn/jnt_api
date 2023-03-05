@@ -34,6 +34,19 @@ app.get("/players", async (req, res) => {
   }
 });
 
+app.get("/profile/:id", async (req, res) => {
+  try {
+    const id = req.params["id"];
+    const result = await prisma.player.findFirst({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -99,12 +112,14 @@ app.get("/messages", async (req, res) => {
 
 app.post("/message", async (req, res) => {
   try {
+    const { message, sender } = req.body;
+
     //send message to db
     const result = await prisma.message.create({
       data: {
-        message: "OKKK",
+        message: message,
         sender: {
-          connect: { id: 1 },
+          connect: { id: sender },
         },
       },
     });

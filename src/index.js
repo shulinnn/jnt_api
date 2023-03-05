@@ -38,7 +38,7 @@ app.get("/profile/:id", async (req, res) => {
   try {
     const result = await prisma.player.findFirst({
       where: {
-        id: 1,
+        id: req.params,
       },
     });
     res.status(200).send(result);

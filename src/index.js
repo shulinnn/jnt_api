@@ -96,12 +96,11 @@ app.get("/messages", async (req, res) => {
 
 app.post("/message", async (req, res) => {
   try {
-    const { message, sender } = req.body;
     //send message to db
     const result = await prisma.message.create({
       data: {
-        message: message,
-        sender: sender,
+        message: "OKKK",
+        sender: 1,
       },
     });
     res.json(result);

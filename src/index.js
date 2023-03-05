@@ -42,6 +42,7 @@ app.get("/profile/:id", async (req, res) => {
         id: id,
       },
     });
+    res.json(result);
   } catch (error) {
     console.log(error);
   }

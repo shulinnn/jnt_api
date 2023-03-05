@@ -80,13 +80,35 @@ app.get("/messages", async (req, res) => {
   try {
     const result = await prisma.message.findMany({
       include: {
-        sender: true,
+        sender: {
+          include: {
+            Team: true,
+          },
+        },
       },
     });
     if (result == null) res.status(500).send("No data to show...");
     else res.status(200).send(result);
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.post("/message", async (req, res) => {
+  try {
+    const { message, sender } = req.body;
+    //send message to db
+    const result = await prisma.message.create({
+      data: {
+        message: message,
+        sender: sender,
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    /// Send status with number 500 to frontend
+    res.status(500).send(err);
   }
 });
 

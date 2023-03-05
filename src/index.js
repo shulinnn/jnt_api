@@ -87,7 +87,7 @@ app.get("/messages", async (req, res) => {
         },
       },
       orderBy: {
-        id: "asc",
+        id: "desc",
       },
     });
     if (result == null) res.status(500).send("No data to show...");

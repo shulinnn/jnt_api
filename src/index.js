@@ -41,7 +41,7 @@ app.get("/profile/:id", async (req, res) => {
         id: req.params["id"],
       },
     });
-    res.json(result);
+    res.status(200).send(result);
   } catch (error) {
     console.log(error);
   }

@@ -36,10 +36,9 @@ app.get("/players", async (req, res) => {
 
 app.get("/profile/:id", async (req, res) => {
   try {
-    const id = req.params["id"];
     const result = await prisma.player.findFirst({
       where: {
-        id: id,
+        id: req.params["id"],
       },
     });
     res.json(result);

@@ -100,7 +100,9 @@ app.post("/message", async (req, res) => {
     const result = await prisma.message.create({
       data: {
         message: "OKKK",
-        sender: 1,
+        sender: {
+          connect: { id: 1 },
+        },
       },
     });
     res.json(result);

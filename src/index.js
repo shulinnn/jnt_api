@@ -115,19 +115,17 @@ app.post("/message", async (req, res) => {
   try {
     const { message, sender } = req.body;
 
-    //send message to db
     const result = await prisma.message.create({
       data: {
         message: message,
         sender: {
-          connect: { id: sender },
+          connect: { id: parseInt(sender) },
         },
       },
     });
     res.json(result);
   } catch (error) {
     console.log(error);
-    /// Send status with number 500 to frontend
     res.status(500).send(err);
   }
 });

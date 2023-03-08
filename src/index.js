@@ -42,6 +42,10 @@ app.get("/profile/:id", async (req, res) => {
       where: {
         id: parseInt(id),
       },
+      include: {
+        Team: true,
+        Match: true,
+      },
     });
     res.status(200).send(result);
   } catch (error) {

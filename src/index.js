@@ -22,6 +22,7 @@ app.get("/players", async (req, res) => {
   try {
     const result = await prisma.player.findMany({
       select: {
+        id : true,
         username: true,
         user_flag: true,
         user_photo: true,

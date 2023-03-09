@@ -21,9 +21,10 @@ model Player {
   messageId      Message[]
   Team           Team?     @relation(fields: [teamId], references: [id])
   teamId         Int?
-  Match          Match[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+  Match          Match?    @relation(fields: [matchId], references: [id])
+  matchId        Int?
 }
 
 model Message {

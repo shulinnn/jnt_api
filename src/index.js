@@ -44,7 +44,6 @@ app.get("/profile/:id", async (req, res) => {
       },
       include: {
         Team: true,
-        Match: true,
       },
     });
     res.status(200).send(result);

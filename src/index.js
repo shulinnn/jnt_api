@@ -47,7 +47,7 @@ app.get("/profile/:id", async (req, res) => {
           include: {
             Match: {
               include: {
-                Team: {
+                teams: {
                   include: {
                     Player: true,
                   },

@@ -49,7 +49,7 @@ app.get("/profile/:id", async (req, res) => {
               include: {
                 teams: {
                   include: {
-                    Player: true,
+                    players: true,
                   },
                 },
               },

@@ -70,6 +70,13 @@ app.get("/match/:id", async (req, res) => {
     const result = await prisma.match.findFirst({
       where: {
         id: parseInt(id),
+        include: {
+          teams: {
+            include: {
+              players: true,
+            },
+          },
+        },
       },
     });
     res.json(result);

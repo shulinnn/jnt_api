@@ -64,6 +64,20 @@ app.get("/profile/:id", async (req, res) => {
   }
 });
 
+app.get("/match/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await prisma.match.findFirst({
+      where: {
+        id: parseInt(id),
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;

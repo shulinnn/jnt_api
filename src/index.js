@@ -188,7 +188,17 @@ app.post("/bet", async (req, res) => {
         },
       },
     });
-    res.send(result);
+    const decrementBettingPoints = await prisma.player.update({
+      where: {
+        id: parseInt(betterId),
+      },
+      data: {
+        betting_points: {
+          decrement: betAmount,
+        },
+      },
+    });
+    res.send(result + decrementBettingPoints);
   } catch (error) {
     console.log(error);
   }

@@ -25,6 +25,7 @@ model Player {
   updatedAt      DateTime  @updatedAt
   Match          Match?    @relation(fields: [matchId], references: [id])
   matchId        Int?
+  Bet            Bet[]
 }
 
 model Message {
@@ -45,6 +46,7 @@ model Team {
   Match       Match[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Bet         Bet[]
 }
 
 model Match {
@@ -54,6 +56,21 @@ model Match {
   exchange_rates Float[]
   rounds_to_play Int
   createdAt      DateTime @default(now())
+  playedAt       DateTime
   updatedAt      DateTime @updatedAt
   Player         Player[]
+  Bet            Bet[]
+}
+
+model Bet {
+  id         Int      @id @default(autoincrement())
+  better     Player   @relation(fields: [playerId], references: [id])
+  bettedOn   Match    @relation(fields: [matchId], references: [id])
+  bettedTeam Team     @relation(fields: [teamId], references: [id])
+  betAmount  Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  playerId   Int
+  matchId    Int
+  teamId     Int
 }

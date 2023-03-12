@@ -167,6 +167,32 @@ app.post("/message", async (req, res) => {
   }
 });
 
+app.post("/bet", async (req, res) => {
+  try {
+    const { betAmount, betterId, matchId, betTeamId } = req.body;
+    const result = await prisma.bet.create({
+      data: {
+        betAmount: betAmount,
+        better: {
+          connect: { id: parseInt(betterId) },
+        },
+        bettedOn: {
+          connect: {
+            id: parseInt(matchId),
+          },
+        },
+        bettedTeam: {
+          connect: {
+            id: parseInt(betTeamId),
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/register", async (req, res) => {
   try {
     if (!req.files) {

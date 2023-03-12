@@ -188,6 +188,7 @@ app.post("/bet", async (req, res) => {
         },
       },
     });
+    res.send(result);
   } catch (error) {
     console.log(error);
   }

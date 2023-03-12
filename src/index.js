@@ -194,7 +194,7 @@ app.post("/bet", async (req, res) => {
       },
       data: {
         betting_points: {
-          decrement: betAmount,
+          decrement: parseInt(betAmount),
         },
       },
     });

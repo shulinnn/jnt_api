@@ -172,7 +172,7 @@ app.post("/bet", async (req, res) => {
     const { betAmount, betterId, matchId, betTeamId } = req.body;
     const result = await prisma.bet.create({
       data: {
-        betAmount: betAmount,
+        betAmount: parseInt(betAmount),
         better: {
           connect: { id: parseInt(betterId) },
         },

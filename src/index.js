@@ -116,7 +116,15 @@ app.post("/login", async (req, res) => {
 
 app.get("/matches", async (req, res) => {
   try {
-    const result = await prisma.match.findMany();
+    const result = await prisma.match.findMany({
+      include: {
+        teams: {
+          include: {
+            players: true,
+          },
+        },
+      },
+    });
     if (result == null) {
       res.status(500).send("No data to show or data not found");
     } else {

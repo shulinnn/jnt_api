@@ -35,6 +35,23 @@ app.get("/players", async (req, res) => {
   }
 });
 
+app.get("/team/:id", async (req, res) => {
+  try {
+    const result = await prisma.team.findFirst({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      include: {
+        players: true,
+        Match: true,
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/profile/:id", async (req, res) => {
   try {
     const id = req.params.id;

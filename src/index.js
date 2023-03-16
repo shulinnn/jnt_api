@@ -43,7 +43,11 @@ app.get("/team/:id", async (req, res) => {
       },
       include: {
         players: true,
-        Match: true,
+        Match: {
+          include: {
+            Player: true,
+          },
+        },
       },
     });
     res.json(result);

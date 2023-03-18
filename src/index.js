@@ -41,7 +41,11 @@ app.get("/bets/:id", async (req, res) => {
       where: {
         playerId: parseInt(req.params.id),
       },
+      include: {
+        bettedOn: true,
+      },
     });
+
     res.json(result);
   } catch (error) {
     console.log(error);

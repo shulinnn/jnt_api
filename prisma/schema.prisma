@@ -26,8 +26,8 @@ model Player {
   Match          Match?    @relation(fields: [matchId], references: [id])
   matchId        Int?
   Bet            Bet[]
-  Stats          Stats     @relation(fields: [statsId], references: [id])
-  statsId        Int
+  Stats          Stats?    @relation(fields: [statsId], references: [id])
+  statsId        Int?
   badge          Badge[]
 }
 

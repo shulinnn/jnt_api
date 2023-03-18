@@ -39,7 +39,7 @@ app.get("/bets/:id", async (req, res) => {
   try {
     const result = await prisma.bet.findMany({
       where: {
-        better: parseInt(req.params.id),
+        playerId: parseInt(req.params.id),
       },
     });
     res.json(result);

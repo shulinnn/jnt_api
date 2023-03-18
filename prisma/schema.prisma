@@ -65,12 +65,12 @@ model Badge {
 model Stats {
   id             Int      @id @default(autoincrement())
   Player         Player[]
-  orc_stats      Int[]
-  human_stats    Int[]
-  nightelf_stats Int[]
-  undead_stats   Int[]
-  tour_stats     Int[]
-  ffa_wins       Int[]
+  orc_stats      Int[]    @default([0, 0])
+  human_stats    Int[]    @default([0, 0])
+  nightelf_stats Int[]    @default([0, 0])
+  undead_stats   Int[]    @default([0, 0])
+  tour_stats     Int[]    @default([0, 0])
+  ffa_wins       Int[]    @default([0, 0])
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

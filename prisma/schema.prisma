@@ -26,6 +26,9 @@ model Player {
   Match          Match?    @relation(fields: [matchId], references: [id])
   matchId        Int?
   Bet            Bet[]
+  Stats          Stats     @relation(fields: [statsId], references: [id])
+  statsId        Int
+  badge          Badge[]
 }
 
 model Message {
@@ -47,6 +50,29 @@ model Team {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   Bet         Bet[]
+}
+
+model Badge {
+  id          Int      @id @default(autoincrement())
+  badge_name  String
+  badge_color String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Player      Player?  @relation(fields: [playerId], references: [id])
+  playerId    Int?
+}
+
+model Stats {
+  id             Int      @id @default(autoincrement())
+  Player         Player[]
+  orc_stats      Int[]
+  human_stats    Int[]
+  nightelf_stats Int[]
+  undead_stats   Int[]
+  tour_stats     Int[]
+  ffa_wins       Int[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Match {

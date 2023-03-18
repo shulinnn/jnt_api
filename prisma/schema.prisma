@@ -59,7 +59,7 @@ model Badge {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   Player      Player?  @relation(fields: [playerId], references: [id])
-  playerId    Int?
+  playerId    Int[]
 }
 
 model Stats {

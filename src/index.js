@@ -42,7 +42,11 @@ app.get("/bets/:id", async (req, res) => {
         playerId: parseInt(req.params.id),
       },
       include: {
-        bettedOn: true,
+        bettedOn: {
+          include: {
+            teams: true,
+          },
+        },
       },
     });
 

@@ -167,6 +167,7 @@ app.get("/messages", async (req, res) => {
         sender: {
           include: {
             Team: true,
+            badge: true,
           },
         },
       },

@@ -35,6 +35,19 @@ app.get("/players", async (req, res) => {
   }
 });
 
+app.get("/bets/:id", async (req, res) => {
+  try {
+    const result = await prisma.bet.findMany({
+      where: {
+        better: parseInt(req.params.id),
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/team/:id", async (req, res) => {
   try {
     const result = await prisma.team.findFirst({

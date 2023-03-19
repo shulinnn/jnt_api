@@ -35,6 +35,25 @@ app.get("/players", async (req, res) => {
   }
 });
 
+app.post("/opening-win", async (req, res) => {
+  const { betterId, winAmount } = req.body;
+
+  try {
+    const result = await prisma.player.update({
+      where: {
+        id: parseInt(betterId),
+      },
+      data: {
+        betting_points: {
+          increment: winAmount,
+        },
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/bets/:id", async (req, res) => {
   try {
     const result = await prisma.bet.findMany({

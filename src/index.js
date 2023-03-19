@@ -310,6 +310,46 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/control-panel/war-token/increment", async (req, res) => {
+  const { userId, tokenAmount } = req.body;
+
+  try {
+    const result = await prisma.player.update({
+      where: {
+        id: parseInt(userId),
+      },
+      data: {
+        betting_points: {
+          increment: parseInt(tokenAmount),
+        },
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/control-panel/war-token/decrement", async (req, res) => {
+  const { userId, tokenAmount } = req.body;
+
+  try {
+    const result = await prisma.player.update({
+      where: {
+        id: parseInt(userId),
+      },
+      data: {
+        betting_points: {
+          decrement: parseInt(tokenAmount),
+        },
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const server = app.listen(4000, () =>
   console.log(`
 🚀 Server ready at: http://localhost:4000`)

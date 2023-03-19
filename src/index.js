@@ -49,6 +49,7 @@ app.post("/opening-win", async (req, res) => {
         },
       },
     });
+    res.json(result);
   } catch (error) {
     console.log(error);
   }

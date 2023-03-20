@@ -345,6 +345,7 @@ app.post("/controls-panel/match/", async (req, res) => {
         exchange_rates: [kurzTeamA, kurzTeamB],
       },
     });
+    res.json(result);
   } catch (error) {
     console.log(error);
   }

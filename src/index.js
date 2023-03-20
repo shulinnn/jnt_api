@@ -341,8 +341,8 @@ app.post("/controls-panel/match/", async (req, res) => {
         id: parseInt(matchId),
       },
       data: {
-        scores: [scoreTeamA, scoreTeamB],
-        exchange_rates: [kurzTeamA, kurzTeamB],
+        scores: [parseInt(scoreTeamA), parseInt(scoreTeamB)],
+        exchange_rates: [parseInt(kurzTeamA), parseInt(kurzTeamB)],
       },
     });
     res.json(result);

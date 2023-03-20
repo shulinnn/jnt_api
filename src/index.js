@@ -334,6 +334,20 @@ app.post("/controls-panel/match/", async (req, res) => {
   const { matchId, scoreTeamA, scoreTeamB, kurzTeamA, kurzTeamB } = req.body;
 
   console.log(req.body);
+
+  try {
+    const result = await prisma.match.update({
+      where: {
+        id: parseInt(matchId),
+      },
+      data: {
+        scores: [scoreTeamA, scoreTeamB],
+        exchange_rates: [kurzTeamA, kurzTeamB],
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/control-panel/war-token/decrement", async (req, res) => {

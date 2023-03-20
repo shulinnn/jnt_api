@@ -330,6 +330,25 @@ app.post("/control-panel/war-token/increment", async (req, res) => {
   }
 });
 
+app.post("/controls-panel/match/", async (req, res) => {
+  const { matchId, exchange_rates, scores } = req.body;
+
+  try {
+    const result = await prisma.match.update({
+      where: {
+        id: parseInt(matchId),
+      },
+      data: {
+        exchange_rates: exchange_rates,
+        scores: scores,
+      },
+    });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/control-panel/war-token/decrement", async (req, res) => {
   const { userId, tokenAmount } = req.body;
 

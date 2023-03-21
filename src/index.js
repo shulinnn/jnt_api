@@ -26,6 +26,7 @@ app.get("/players", async (req, res) => {
         username: true,
         user_flag: true,
         user_photo: true,
+        betting_points: true,
       },
     });
 

@@ -347,6 +347,7 @@ app.post("/controls-panel/match/", async (req, res) => {
       },
     });
     res.json(result);
+    console.log(result);
   } catch (error) {
     console.log(error);
   }

@@ -343,7 +343,7 @@ app.post("/controls-panel/match/", async (req, res) => {
       },
       data: {
         scores: [parseInt(scoreTeamA), parseInt(scoreTeamB)],
-        exchange_rates: [parseInt(kurzTeamA), parseInt(kurzTeamB)],
+        exchange_rates: [parseFloat(kurzTeamA), parseFloat(kurzTeamB)],
       },
     });
     res.json(result);

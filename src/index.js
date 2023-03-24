@@ -1,7 +1,8 @@
 const express = require("express");
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient, Prisma } = require("@prisma/client");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const { Decimal } = require("@prisma/client/runtime");
 
 const prisma = new PrismaClient();
 const app = express();
@@ -346,7 +347,10 @@ app.post("/controls-panel/match/", async (req, res) => {
       },
       data: {
         scores: [parseInt(scoreTeamA), parseInt(scoreTeamB)],
-        exchange_rates: [parseFloat(kurzTeamA), parseFloat(kurzTeamB)],
+        exchange_rates: [
+          new Prisma.Decimal(kurzTeamA),
+          new Prisma.Decimal(kurzTeamB),
+        ],
       },
     });
     res.json(result);

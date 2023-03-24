@@ -337,6 +337,9 @@ app.post("/controls-panel/match/", async (req, res) => {
   console.log(req.body);
 
   try {
+    console.log(kurzTeamA);
+    console.log(kurzTeamB);
+
     const result = await prisma.match.update({
       where: {
         id: parseInt(matchId),

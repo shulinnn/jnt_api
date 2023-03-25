@@ -49,6 +49,9 @@ app.post("/opening-win", async (req, res) => {
         betting_points: {
           increment: parseInt(winAmount),
         },
+        case_ticket: {
+          decrement: 1,
+        },
       },
     });
     res.json(result);
